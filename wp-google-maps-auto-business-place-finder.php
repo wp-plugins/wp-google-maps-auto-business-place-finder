@@ -29,11 +29,11 @@ Author URI: http://www.luciaintelisano.it
 		return $row;
 	}
 		
-	function wgabf_is_shortcode() {
+	function wgabf_is_shortcode($incat=0) {
  
 		global $post;
  
-		if ( strstr( $post->post_content, '[wgabf ' ) ) {
+		if ($incat==0 && strstr( $post->post_content, '[wgabf ' ) ) {
 			 return true;
 		} else {
 			$cats = strtolower(get_option('wgabf_view_on_cat'));
@@ -371,7 +371,7 @@ function wgabf_settings_page() {
 function wgabf_my_the_post_action( $content ) {
  
 	 
-	if (wgabf_is_shortcode()) {
+	if (wgabf_is_shortcode(1)) {
 			global $post, $wp_query;
     		$post_id = $post->ID;
     		 
@@ -420,7 +420,7 @@ function wgabf_my_the_post_action( $content ) {
 }
 
  function wgabf_add_my_media_button() {
-    echo '<a href="javascript:wp.media.editor.insert(\'[wgabf location=&quot;&quot; lat=&quot;&quot; lng=&quot;&quot;]\');" id="insert-my-media" class="button">Add business map</a>';
+    echo '<a href="javascript:wp.media.editor.insert(\'[wgabf location=&quot;&quot; lat=&quot;&quot; lng=&quot;&quot; title=&quot;&quot;]\');" id="insert-my-media" class="button">Add business map</a>';
 }
  
  
